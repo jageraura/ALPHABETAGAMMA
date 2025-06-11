@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celebrity News</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='logotype.png') }}" alt="Logotype" style="width: 150px; height: auto;">
+        <h1>Celebrity News</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Latest News</h2>
+            {% for article in articles %}
+                <div class="article">
+                    <h3><a href="{{ article.link }}" target="_blank">{{ article.title }}</a></h3>
+                    {% if article.media_url %}
+                        <img src="{{ article.media_url }}" alt="Article Image" style="width: 100%; height: auto;">
+                    {% endif %}
+                    <p>{{ article.summary }}</p>
+                </div>
+            {% endfor %}
+        </section>
+        <a href="{{ url_for('subscribe') }}" class="subscribe-button">Subscribe Now</a>
+    </main>
+    <footer>
+        <p>© 2025-26 Celebrity News Corp. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .checkout-form {
+            width: 60%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .checkout-form label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .checkout-form input[type="text"],
+        .checkout-form input[type="email"],
+        .checkout-form input[type="tel"],
+        .checkout-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .checkout-form .expiration-date,
+        .checkout-form .cvv-date {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .checkout-form .expiration-date input[type="text"],
+        .checkout-form .cvv-date input[type="text"] {
+            width: 48%;
+        }
+
+        .checkout-form input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .checkout-form input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            const firstName = document.getElementById('first_name').value;
+            const lastName = document.getElementById('last_name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const deliveryAddress = document.getElementById('delivery_address').value;
+            const billingAddress = document.getElementById('billing_address').value;
+            const creditCardNumber = document.getElementById('credit_card_number').value;
+            const expirationMonth = document.getElementById('expiration_month').value;
+            const expirationYear = document.getElementById('expiration_year').value;
+            const cvvNumber = document.getElementById('cvv_number').value;
+
+            if (firstName === '' || lastName === '' || email === '' || phone === '' || deliveryAddress === '' || billingAddress === '' || creditCardNumber === '' || expirationMonth === '' || expirationYear === '' || cvvNumber === '') {
+                alert('Please fill in all required fields.');
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <h1>Checkout</h1>
+    <form class="checkout-form" method="POST" action="{{ url_for('checkout') }}" onsubmit="return validateForm()">
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name" placeholder="Enter your first name" required>
+
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name" placeholder="Enter your last name" required>
+
+        <label for="email">E-Mail:</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+
+        <label for="delivery_address">Delivery Address:</label>
+        <textarea id="delivery_address" name="delivery_address" rows="4" placeholder="Enter your delivery address" required></textarea>
+
+        <label for="billing_address">Billing Address:</label>
+        <textarea id="billing_address" name="billing_address" rows="4" placeholder="Enter your billing address" required></textarea>
+
+        <label for="credit_card_number">Credit Card Number:</label>
+        <input type="text" id="credit_card_number" name="credit_card_number" placeholder="Enter your credit card number" required>
+
+        <label for="expiration_date">Expiration Date:</label>
+        <div class="expiration-date">
+            <input type="text" id="expiration_month" name="expiration_month" placeholder="MM" required>
+            <input type="text" id="expiration_year" name="expiration_year" placeholder="YYYY" required>
+        </div>
+
+        <label for="cvv_number">CVV Number:</label>
+        <div class="cvv-date">
+            <input type="text" id="cvv_number" name="cvv_number" placeholder="Enter the CVV number" required>
+        </div>
+
+        <input type="submit" value="Place Order">
+    </form>
+</body>
+</html>

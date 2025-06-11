@@ -1,0 +1,136 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff; /* White */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #002868; /* Dark Blue */
+    color: #ffffff; /* White */
+    padding: 1rem;
+    text-align: center;
+    background-image: url('{{ url_for("static", filename="logotype.png") }}');
+    background-repeat: repeat-x; /* Repeat horizontally */
+    background-size: contain; /* Ensure the logo is properly sized */
+    height: 100px; /* Adjust height to fit the logos */
+    position: relative;
+    z-index: 1;
+}
+
+header h1 {
+    position: relative;
+    z-index: 2; /* Ensure text is above the background image */
+    background: rgba(0, 40, 104, 0.7); /* Semi-transparent background to make text stand out */
+    padding: 0.5rem;
+}
+
+main {
+    padding: 2rem;
+    flex: 1;
+}
+
+.article {
+    background: #ffffff; /* White */
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+    border-left: 5px solid #BF0A30; /* Red */
+    overflow: hidden; /* Ensure content stays within container */
+}
+
+.article img {
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    max-width: 100%; /* Ensure image fits within the container */
+}
+
+.article h3 {
+    margin-top: 0;
+    color: #002868; /* Dark Blue */
+}
+
+.article p {
+    color: #BF0A30; /* Red */
+}
+
+.article a {
+    color: #002868; /* Dark Blue */
+    text-decoration: none;
+}
+
+.article a:hover {
+    text-decoration: underline;
+}
+
+.subscribe-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #BF0A30; /* Red */
+    color: #ffffff; /* White */
+    padding: 1rem 2rem;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+}
+
+.subscribe-button:hover {
+    background-color: #002868; /* Dark Blue */
+}
+
+footer {
+    background-color: #002868; /* Dark Blue */
+    color: #ffffff; /* White */
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.75rem;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.subscription-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.subscription-plan {
+    margin-bottom: 1rem;
+}
+
+.payment-details label {
+    display: block;
+    margin-top: 1rem;
+}
+
+.payment-details input {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.25rem;
+}
+
+button {
+    background-color: #002868; /* Dark Blue */
+    color: #ffffff; /* White */
+    border: none;
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 1rem;
+    display: block;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #BF0A30; /* Red */
+}

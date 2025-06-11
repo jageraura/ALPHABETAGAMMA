@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .banner {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: none;
+            padding: 10px 0;
+            overflow: hidden;
+            white-space: none;
+        }
+
+        .logo-container {
+            display: flex;
+            gap: 10px;
+            animation: scrollBanner 10s linear infinite;
+	    width: max-content;
+        }
+
+        .logo-container img {
+            height: 65px;
+            flex-shrink: 0;
+        }
+
+        @keyframes scrollBanner {
+            from {
+                transform: translateX(0%);
+            }
+            to {
+                transform: translateX(-68%);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="banner">
+    <div class="logo-container">
+        {% for i in range(56) %}
+            <img src="{{ url_for('static', filename='logotype.png') }}" alt="Logo">
+        {% endfor %}
+    </div>
+</div>
+
+<header>
+</header>
+
+<main>
+    <section>
+        <h2>Latest News</h2>
+        {% for article in articles %}
+            <div class="article">
+                <h3><a href="{{ article.link }}" target="_blank">{{ article.title }}</a></h3>
+                {% if article.media_url %}
+                    <img src="{{ article.media_url }}" alt="Article image">
+                {% endif %}
+                <p>{{ article.summary }}</p>
+            </div>
+        {% endfor %}
+    </section>
+
+    <a href="{{ url_for('subscribe') }}" class="subscribe-button">Subscribe</a>
+</main>
+
+<footer>
+    <p>&copy; Analytic Bay 2025-26</p>
+</footer>
+
+</body>
+</html>

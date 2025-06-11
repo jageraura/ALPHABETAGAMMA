@@ -1,0 +1,143 @@
+/* ===== GENERAL STYLES ===== */
+body {
+    font-family: Arial, sans-serif;
+    background-color: yellow;
+    color: #1f23f0;
+    margin: 0;
+    padding: 0;
+}
+
+/* ===== HEADER & NAVIGATION ===== */
+header {
+    background-color: red;
+    padding: 20px 0;
+    color: white;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    background-color: white;
+    max-width: auto;
+    margin: 0 auto;
+}
+
+.logo {
+    height: 100px;
+    width: auto;
+    max-width: auto;
+    display: inline;
+}
+
+/* ===== HAMBURGER MENU ===== */
+.hamburger-menu {
+    font-size: 48px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: red;
+    padding: 10px;
+    line-height: 1;
+}
+
+#mobile-menu {
+    display: none;
+    flex-direction: column;
+    background: red;
+    padding: auto;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    z-index: 100;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+#mobile-menu:not(.hidden) {
+    display: flex;
+}
+
+#mobile-menu a {
+    color: white;
+    padding: 12px 15px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+#mobile-menu a:hover {
+    background-color: darkred;
+}
+
+/* ===== MAIN CONTENT ===== */
+main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ===== FORM STYLES ===== */
+form {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+input[type="radio"] {
+    accent-color: blue;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    background-color: #57c1fa;
+    padding: 16px;
+    text-align: center;
+    color: white;
+    margin-top: 20px;
+}
+
+/* ===== MEDIA QUERIES ===== */
+@media screen and (max-width: 768px) {
+    body {
+        font-size: 16px;
+    }
+
+    .nav-container {
+        flex-direction: row;
+        text-align: center;
+        padding: 10px 15px;
+    }
+
+    .logo {
+        height: 60px;
+    }
+
+    .hamburger-menu {
+        font-size: 36px;
+    }
+
+    form {
+        width: 90%;
+        padding: 15px;
+    }
+
+    #mobile-menu a {
+        font-size: 16px;
+        padding: 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .logo {
+        height: 50px;
+    }
+    
+    .hamburger-menu {
+        font-size: 32px;
+    }
+}

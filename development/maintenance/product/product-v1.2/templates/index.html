@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('img');
+            images.forEach(image => {
+                image.addEventListener('click', function() {
+                    alert('Clicked on: ' + this.alt);
+                });
+            });
+            updateCartCount();
+        });
+
+        function updateCartCount() {
+            fetch('/cart_count')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('cart-count').innerText = data.count;
+                });
+        }
+    </script>
+</head>
+<body>
+    <div class="navbar">
+        <div class="dropdown">
+            <button class="dropbtn">Menu</button>
+            <div class="dropdown-content">
+                <a href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for('register') }}">Register</a>
+                <a href="{{ url_for('users') }}">Users</a>
+                <a href="{{ url_for('sessions') }}">Sessions</a>
+                <a href="{{ url_for('products') }}">Products</a>
+            </div>
+        </div>
+        <div class="cart-icon">
+            <a href="{{ url_for('cart') }}">
+                <img src="{{ url_for('static', filename='cart-icon.png') }}" alt="Cart" width="30">
+                <span id="cart-count">0</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="header">
+        {% if session.get('username') %}
+            <div class="user-info">
+                Welcome, {{ session['username'] }}!
+            </div>
+        {% endif %}
+    </div>
+    <h1>Product List</h1>
+    <table>
+        <tr>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>Description</th>
+            <th>Product Type</th>
+            <th>Product Subtype</th>
+        </tr>
+        {% for product in products %}
+        <tr>
+            <td><a href="{{ url_for('product_detail', product_id=product['id']) }}">{{ product['productname'] }}</a></td>
+            <td>{{ product['price'] }}</td>
+            <td><a href="{{ url_for('product_detail', product_id=product['id']) }}"><img src="{{ url_for('static', filename=product['image']) }}" alt="{{ product['productname'] }}" width="100"></a></td>
+            <td>{{ product['description'] }}</td>
+            <td>{{ product['product_type'] }}</td>
+            <td>{{ product['product_subtype'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <div class="pagination">
+        {% if page > 1 %}
+        <a href="{{ url_for('index', page=page-1) }}">Previous</a>
+        {% endif %}
+        {% if page < (total_products / per_page) %}
+        <a href="{{ url_for('index', page=page+1) }}">Next</a>
+        {% endif %}
+    </div>
+</body>
+</html>

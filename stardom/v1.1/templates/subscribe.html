@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscribe</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='logotype.png') }}" alt="Logotype" style="width: 150px; height: auto;">
+        <h1>Subscribe to Celebrity News</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Choose Your Subscription Plan</h2>
+            <form action="/subscribe" method="post">
+                <div class="subscription-plan">
+                    <input type="radio" id="monthly" name="plan" value="monthly" checked>
+                    <label for="monthly">$4.99 per month</label>
+                </div>
+                <div class="subscription-plan">
+                    <input type="radio" id="six_months" name="plan" value="six_months">
+                    <label for="six_months">$16.99 for six months</label>
+                </div>
+                <div class="subscription-plan">
+                    <input type="radio" id="yearly" name="plan" value="yearly">
+                    <label for="yearly">$39.99 per year</label>
+                </div>
+                <div class="payment-details">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                    <label for="card_number">Card Number:</label>
+                    <input type="text" id="card_number" name="card_number" required>
+                    <label for="expiry_date">Expiry Date:</label>
+                    <input type="text" id="expiry_date" name="expiry_date" required placeholder="MM/YY">
+                    <label for="cvv">CVV:</label>
+                    <input type="text" id="cvv" name="cvv" required>
+                </div>
+                <button type="submit">Subscribe</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>© 2025-26 Celebrity News Corp. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

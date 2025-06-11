@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Page</title>
+    <style>
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+        }
+        .product {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .pagination a {
+            margin: 0 5px;
+            text-decoration: none;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid">
+        {% for product in products %}
+        <div class="product">
+            <p>ID: {{ product.productid }}</p>
+            <p>Name: {{ product.productname }}</p>
+            <p>Price: ${{ product.productprice }}</p>
+            {% if product.productcolor %}
+            <p>Color: {{ product.productcolor }}</p>
+            {% endif %}
+            {% if product.productsize %}
+            <p>Size: {{ product.productsize }}</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="pagination">
+        {% if page > 1 %}
+        <a href="/?page={{ page - 1 }}">Previous</a>
+        {% endif %}
+        {% if total_products > page * per_page %}
+        <a href="/?page={{ page + 1 }}">Next</a>
+        {% endif %}
+    </div>
+</body>
+</html>

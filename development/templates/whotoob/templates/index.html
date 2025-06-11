@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Welcome</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        /* Carousel Styles */
+        .carousel {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .carousel-item {
+            min-width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+        .carousel-control {
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        /* Video Grid Styles */
+        .video-section {
+            margin: 40px auto;
+            max-width: 1200px;
+            padding: 0 20px;
+        }
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .video-item {
+            background: #f0f0f0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .video-item video {
+            width: 100%;
+            display: block;
+        }
+        .video-item p {
+            padding: 10px;
+            margin: 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <img class="logo" src="{{ url_for('static', filename='images/logotype.png') }}" alt="Site Logo">
+            <button class="hamburger-menu" onclick="toggleMenu()">☰</button>
+        </div>
+        <nav id="mobile-menu" class="hidden">
+            <a href="{{ url_for('auth.login') }}">Login</a>
+            <a href="{{ url_for('auth.signup') }}">Sign Up</a>
+            <a href="{{ url_for('content.dashboard') }}">Dashboard</a>
+        </nav>
+    </header>
+    <main>
+        <h1>Welcome to Our Streaming & Photography Platform</h1>
+        <p>Subscribe to unlock premium content.</p>
+
+        <!-- Image Carousel -->
+        <div class="carousel">
+            <div class="carousel-inner">
+                <img src="{{ url_for('static', filename='images/carousel1.jpg') }}" alt="Slide 1" class="carousel-item active">
+                <img src="{{ url_for('static', filename='images/carousel2.jpg') }}" alt="Slide 2" class="carousel-item">
+                <img src="{{ url_for('static', filename='images/carousel3.jpg') }}" alt="Slide 3" class="carousel-item">
+            </div>
+            <div class="carousel-controls">
+                <button class="carousel-control" onclick="prevSlide()">❮</button>
+                <button class="carousel-control" onclick="nextSlide()">❯</button>
+            </div>
+        </div>
+
+        <!-- Video Section -->
+        <div class="video-section">
+            <h2>Featured Videos</h2>
+            <div class="video-grid">
+                <div class="video-item">
+                    <video controls>
+                        <source src="{{ url_for('static', filename='videos/video1.mp4') }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <p>Video Title 1</p>
+                </div>
+                <div class="video-item">
+                    <video controls>
+                        <source src="{{ url_for('static', filename='videos/video2.mp4') }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <p>Video Title 2</p>
+                </div>
+                <div class="video-item">
+                    <video controls>
+                        <source src="{{ url_for('static', filename='videos/video3.mp4') }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <p>Video Title 3</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        &copy; WHOTOOB
+    </footer>
+    <script>
+        // Carousel Logic
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-item');
+        const totalSlides = slides.length;
+
+        function updateCarousel() {
+            const carouselInner = document.querySelector('.carousel-inner');
+            carouselInner.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+
+        // Auto-scroll every 5 seconds
+        setInterval(nextSlide, 5000);
+
+        // Mobile Menu Toggle (existing)
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>

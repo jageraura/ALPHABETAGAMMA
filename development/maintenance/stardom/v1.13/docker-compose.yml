@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  flask_app:
+    image: STARDOM
+    ports:
+      - "10001:10001"
+    volumes:
+      - /home/princess/ALPHABETAGAMMA/development/static:app/static
+      - /home/princess/ALPHABETAGAMMA/development/templates:app/templates

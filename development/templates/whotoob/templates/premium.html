@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Premium Content</title>
+</head>
+<body>
+    <h1>Exclusive Premium Content</h1>
+    {% if current_user.is_premium %}
+        <p>Enjoy these high-quality images and streams!</p>
+        <img src="{{ url_for('static', filename='images/sample.jpg') }}" alt="Premium Photo">
+    {% else %}
+        <p>You need to upgrade your account to view this content.</p>
+    {% endif %}
+</body>
+</html>
