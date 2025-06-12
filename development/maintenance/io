@@ -1,0 +1,4 @@
+docker run -p 10001:10001 \
+  -v /home/princess/ALPHABETAGAMMA/development/static/stardom:/app/static \
+  -v /home/princess/ALPHABETAGAMMA/development/templates/stardom:/app/templates \
+  stardom

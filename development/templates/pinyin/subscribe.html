@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUBSCRIBE</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+    <style>
+
+    .rh{
+	    color: #DB4B4B;
+    }
+    .bh {
+	    color: #66A5D0;
+    }
+
+    </style>
+
+</head>
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='logotype.png') }}" alt="Logotype" style="width: 150px; height: auto;">
+        <h1>SUBSCRIBE TODAY!</h1>
+	<b><p>SIGN UP TODAY</b> and recieve <b><p class="bh">EXCLUSIVE</p></b> offers available only to <b><p class="rh">STARDOMINATION.COM</p></b> subscribers.</p>
+    </header>
+    <main>
+        <section>
+            <h2>Choose Your Subscription Plan</h2>
+            <form action="/subscribe" method="post">
+                <div class="subscription-plan">
+                    <input type="radio" id="monthly" name="plan" value="monthly" checked>
+                    <label for="monthly">$4.99 per month</label>
+                </div>
+                <div class="subscription-plan">
+                    <input type="radio" id="six_months" name="plan" value="six_months">
+                    <label for="six_months">$16.99 for six months</label>
+                </div>
+                <div class="subscription-plan">
+                    <input type="radio" id="yearly" name="plan" value="yearly">
+                    <label for="yearly">$39.99 per year</label>
+                </div>
+                <div class="payment-details">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                    <label for="card_number">Card Number:</label>
+                    <input type="text" id="card_number" name="card_number" required>
+                    <label for="expiry_date">Expire Date:</label>
+                    <input type="text" id="expiry_date" name="expiry_date" required placeholder="MM/YY">
+                    <label for="cvv">CVV: </label>
+                    <input type="text" id="cvv" name="cvv" required placeholder="3-4 digit security code">
+		    
+		    <label for="country">Billing Country:</label>
+		    <input type="text" id="country" name="country" required>
+		
+		    <label for="zip">Billing Zipcode:</label>
+		    <input type="text" id="zip" name="zip" required>
+
+                </div>
+                <button type="submit">SUBSCRIBE</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy ANALYTIC BAY 2025-26</p>
+    </footer>
+</body>
+</html>
