@@ -217,4 +217,4 @@ def store_session_data(session_value, last_visit):
     db.commit()
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=10003)
