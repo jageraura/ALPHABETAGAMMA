@@ -7,8 +7,8 @@
   <body>
     <h1>Update Item</h1>
     <form method="post">
-      <label for="itemname">Name:</label>
-      <input type="text" id="itemname" name="itemname" value="{{ item[1] }}"><br>
+      <label for="productname">Name:</label>
+      <input type="text" id="productname" name="productname" value="{{ item[1] }}"><br>
 
       <label for="price">Price:</label>
       <input type="text" id="price" name="price" value="{{ item[2] }}"><br>
@@ -16,8 +16,8 @@
       <label for="description">Description:</label>
       <textarea id="description" name="description">{{ item[3] }}</textarea><br>
 
-      <label for="image1">Image 1:</label>
-      <input type="text" id="image1" name="image1" value="{{ item[4] }}"><br>
+      <label for="image">Image 1:</label>
+      <input type="text" id="image" name="image" value="{{ item[4] }}"><br>
 
       <label for="image2">Image 2:</label>
       <input type="text" id="image2" name="image2" value="{{ item[5] }}"><br>
@@ -25,14 +25,14 @@
       <label for="image3">Image 3:</label>
       <input type="text" id="image3" name="image3" value="{{ item[6] }}"><br>
 
-      <label for="category1">Category 1:</label>
-      <input type="text" id="category1" name="category1" value="{{ item[7] }}"><br>
+      <label for="product_type">Category 1:</label>
+      <input type="text" id="product_type" name="product_type" value="{{ item[7] }}"><br>
 
-      <label for="category2">Category 2:</label>
-      <input type="text" id="category2" name="category2" value="{{ item[8] }}"><br>
+      <label for="product_subtype">Category 2:</label>
+      <input type="text" id="product_subtype" name="product_subtype" value="{{ item[8] }}"><br>
 
-      <label for="category3">Category 3:</label>
-      <input type="text" id="category3" name="category3" value="{{ item[9] }}"><br>
+      <label for="product_alttype">Category 3:</label>
+      <input type="text" id="product_alttype" name="product_alttype" value="{{ item[9] }}"><br>
 
       <button type="submit">Update</button>
     </form>

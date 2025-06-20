@@ -24,51 +24,51 @@ def query_db(query, args=(), one=False):
 
 @app.route('/')
 def index():
-    items = query_db('SELECT itemid, itemname, price, description, image1, image2, image3, category1, category2, category3 FROM items')
+    items = query_db('SELECT id, productname, price, description, image, image2, image3, product_type, product_subtype, product_alttype FROM products')
     return render_template('index.html', items=items)
 
-@app.route('/update/<int:itemid>', methods=['GET', 'POST'])
-def update(itemid):
+@app.route('/update/<int:id>', methods=['GET', 'POST'])
+def update(id):
     if request.method == 'POST':
-        itemname = request.form.get('itemname')
+        productname = request.form.get('productname')
         price = request.form.get('price')
         description = request.form.get('description')
-        image1 = request.form.get('image1')
+        image = request.form.get('image')
         image2 = request.form.get('image2')
         image3 = request.form.get('image3')
-        category1 = request.form.get('category1')
-        category2 = request.form.get('category2')
-        category3 = request.form.get('category3')
+        product_type = request.form.get('product_type')
+        product_subtype = request.form.get('product_subtype')
+        product_alttype = request.form.get('product_alttype')
 
         updates = []
-        if itemname:
-            updates.append(f"itemname = '{itemname}'")
+        if productname:
+            updates.append(f"productname = '{productname}'")
         if price:
             updates.append(f"price = {price}")
         if description:
             updates.append(f"description = '{description}'")
-        if image1:
-            updates.append(f"image1 = '{image1}'")
+        if image:
+            updates.append(f"image = '{image}'")
         if image2:
             updates.append(f"image2 = '{image2}'")
         if image3:
             updates.append(f"image3 = '{image3}'")
-        if category1:
-            updates.append(f"category1 = '{category1}'")
-        if category2:
-            updates.append(f"category2 = '{category2}'")
-        if category3:
-            updates.append(f"category3 = '{category3}'")
+        if product_type:
+            updates.append(f"product_type = '{product_type}'")
+        if product_subtype:
+            updates.append(f"product_subtype = '{product_subtype}'")
+        if product_alttype:
+            updates.append(f"product_alttype = '{product_alttype}'")
 
         if updates:
-            update_query = f"UPDATE items SET {', '.join(updates)} WHERE itemid = {itemid}"
+            update_query = f"UPDATE products SET {', '.join(updates)} WHERE id = {id}"
             db = get_db()
             db.execute(update_query)
             db.commit()
 
         return redirect(url_for('index'))
 
-    item = query_db('SELECT * FROM items WHERE itemid = ?', [itemid], one=True)
+    item = query_db('SELECT * FROM products WHERE id = ?', [id], one=True)
     return render_template('update.html', item=item)
 
 if __name__ == '__main__':

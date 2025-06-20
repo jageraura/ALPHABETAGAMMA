@@ -24,7 +24,7 @@ def query_db(query, args=(), one=False):
 
 @app.route('/')
 def index():
-    items = query_db('SELECT itemid, itemname, price, description, image1, image2, image3, category1, category2, category3 FROM items')
+    items = query_db('SELECT id, productname, price, description, image, image2, image3, product_type, product_subtype, product_alttype FROM products')
     return render_template('index.html', items=items)
 
 if __name__ == '__main__':

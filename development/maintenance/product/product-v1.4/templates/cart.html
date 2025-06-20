@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script>
+        function updateQuantity(productId) {
+            const quantity = document.getElementById('quantity-' + productId).value;
+            fetch('/update_cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ product_id: productId, quantity: quantity })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Cart updated!');
+                location.reload();
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function removeFromCart(productId) {
+            fetch('/remove_from_cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ product_id: productId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Product removed from cart!');
+                location.reload();
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</head>
+<body>
+    <h1>Shopping Cart</h1>
+    <table>
+        <tr>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Actions</th>
+        </tr>
+        {% for item in cart_items %}
+        <tr>
+            <td>{{ item['productname'] }}</td>
+            <td>${{ item['price'] }}</td>
+            <td>
+                <input type="number" id="quantity-{{ item['product_id'] }}" value="{{ item['quantity'] }}" min="1">
+                <button onclick="updateQuantity({{ item['product_id'] }})">Update</button>
+            </td>
+            <td>${{ item['price'] * item['quantity'] }}</td>
+            <td><button onclick="removeFromCart({{ item['product_id'] }})">Remove</button></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{{ url_for('checkout') }}">Proceed to Checkout</a>
+</body>
+</html>

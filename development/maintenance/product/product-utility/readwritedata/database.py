@@ -6,16 +6,16 @@ c = conn.cursor()
 # Create table
 c.execute('''
 CREATE TABLE items (
-    itemid INTEGER PRIMARY KEY,
-    itemname TEXT NOT NULL,
+    id INTEGER PRIMARY KEY,
+    productname TEXT NOT NULL,
     price REAL NOT NULL,
     description TEXT,
-    image1 TEXT,
+    image TEXT,
     image2 TEXT,
     image3 TEXT,
-    category1 TEXT,
-    category2 TEXT,
-    category3 TEXT
+    product_type TEXT,
+    product_subtype TEXT,
+    product_alttype TEXT
 )
 ''')
 
@@ -46,7 +46,7 @@ sample_items = [
 ]
 
 c.executemany('''
-INSERT INTO items (itemname, price, description, image1, image2, image3, category1, category2, category3)
+INSERT INTO items (productname, price, description, image, image2, image3, product_type, product_subtype, product_alttype)
 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
 ''', sample_items)
 
