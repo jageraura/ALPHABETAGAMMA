@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, g, session as flask_session, jsonify
+from werkzeug.security import generate_password_hash, check_password_hash
 import sqlite3
 from datetime import datetime
 import random
@@ -10,7 +11,8 @@ app.secret_key = 'your_secret_key'  # Replace with your secret key
 DATABASE_USERS = 'users.db'
 DATABASE_SESSIONS = 'sessions.db'
 DATABASE_PRODUCTS = 'products.db'
-DATABASE_COMPLETED_ORDERS = 'completed_orders.db'  # Added this line
+DATABASE_COMPLETED_ORDERS = 'completed_orders.db'
+DATABASE_ACTIVE = 'sessionsActive.db'
 
 # Functions to connect to the databases
 def get_db_connection(db_name=DATABASE_PRODUCTS):
@@ -176,7 +178,7 @@ def cart_count():
     conn.close()
 
     return jsonify({'count': count or 0})
-
+'''
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -189,13 +191,68 @@ def register():
         db.commit()
         return redirect(url_for('index'))  # Redirect to index page after registration
     return render_template('register.html')
-
+'''
 @app.route('/users')
 def users():
     db = get_db(DATABASE_USERS)
     cursor = db.execute('SELECT * FROM users')
     users_data = cursor.fetchall()
     return render_template('user.html', users=users_data)
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = generate_password_hash(request.form['password'])
+        email = request.form['email']
+        first_name = request.form['first_name']
+        last_name = request.form['last_name']
+        birthdate = request.form['birthdate']
+        phone = request.form.get('phone')  # Optional
+        session_value = request.form['session_value']
+        db = get_db(DATABASE_USERS)
+        db.execute('''INSERT INTO users (username, password, email, first_name, last_name, birthdate, phone, session_value)
+                      VALUES (?, ?, ?, ?, ?, ?, ?, ?)''',
+                   (username, password, email, first_name, last_name, birthdate, phone, session_value))
+        db.commit()
+        return redirect('/login')
+    return render_template('register.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+
+
+
+
+
+
+
+
+
+
+
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        db = get_db(DATABASE_USERS)
+        user = db.execute('SELECT * FROM users WHERE username = ?', (username,)).fetchone()
+        if user and check_password_hash(user['password'], password):
+            session['user'] = username
+            return redirect('/dashboard')
+        else:
+            return 'Invalid credentials'
+    return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    session.pop('user', None)
+    return redirect('/login')
+
+@app.route('/dashboard')
+def dashboard():
+    if 'user' not in session:
+        return redirect('/login')
+    return f"Welcome, {session['user']}!"
 
 @app.route('/sessions')
 def sessions():

@@ -1,0 +1,31 @@
+<head>
+	  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<form method="POST" onsubmit="return validateForm()">
+  <input name="username" placeholder="Username" required>
+  <input name="password" placeholder="Password" type="password" required>
+  <input name="email" placeholder="Email" type="email" required>
+  <input name="first_name" placeholder="First Name" required>
+  <input name="last_name" placeholder="Last Name" required>
+  <input name="birthdate" type="date" required min="1900-01-01" max="2020-12-31">
+  <input name="phone" placeholder="Phone Number" type="tel">
+  <input type="hidden" name="session_value" value="{{ session_value }}">	  
+  <div id="error-message" style="color: red; margin-top: 10px;"></div>
+  <button type="submit">Register</button>
+</form>
+
+<script>
+function validateForm() {
+  const phone = document.forms[0]['phone'].value;
+  const errorBox = document.getElementById('error-message');
+  errorBox.textContent = '';
+
+  if (phone && !/^\+?\d{7,15}$/.test(phone)) {
+    errorBox.textContent = 'Please enter a valid phone number (digits only, optional + at start).';
+    return false;
+  }
+
+  return true;
+}
+</script>
