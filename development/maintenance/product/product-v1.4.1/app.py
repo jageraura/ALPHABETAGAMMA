@@ -3,6 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import sqlite3
 from datetime import datetime
 import random
+from flask import session
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Replace with your secret key
@@ -16,6 +17,11 @@ DATABASE_ACTIVE = 'sessionsActive.db'
 
 # Functions to connect to the databases
 def get_db_connection(db_name=DATABASE_PRODUCTS):
+    conn = sqlite3.connect(db_name)
+    conn.row_factory = sqlite3.Row
+    return conn
+
+def get_db_alt(db_name=DATABASE_USERS):
     conn = sqlite3.connect(db_name)
     conn.row_factory = sqlite3.Row
     return conn
@@ -218,29 +224,28 @@ def register():
         return redirect('/login')
     return render_template('register.html')
 
+DATABASE_USERS = 'users.db'
+
+def get_db(db_name):
+    conn = sqlite3.connect(db_name)
+    conn.row_factory = sqlite3.Row
+    return conn
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-
-
-
-
-
-
-
-
-
-
-
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+
         db = get_db(DATABASE_USERS)
-        user = db.execute('SELECT * FROM users WHERE username = ?', (username,)).fetchone()
+        user = db.execute("SELECT * FROM users WHERE username = ?", (username,)).fetchone()
+
         if user and check_password_hash(user['password'], password):
-            session['user'] = username
+            session['user'] = username   
             return redirect('/dashboard')
         else:
             return 'Invalid credentials'
+
     return render_template('login.html')
 
 @app.route('/logout')
@@ -252,7 +257,7 @@ def logout():
 def dashboard():
     if 'user' not in session:
         return redirect('/login')
-    return f"Welcome, {session['user']}!"
+    return render_template('dashboard.html')
 
 @app.route('/sessions')
 def sessions():

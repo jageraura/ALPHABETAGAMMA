@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard | {{ username }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Welcome, {{ username }}</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="overview">
+            <h2>Summary</h2>
+            <div class="cards">
+                <div class="card">?? Tasks: <strong>3 pending</strong></div>
+                <div class="card">?? Messages: <strong>2 unread</strong></div>
+                <div class="card">?? Reports: <strong>Last updated 12:00 PM</strong></div>
+            </div>
+        </section>
+
+        <section class="activity">
+            <h2>Recent Activity</h2>
+            <ul>
+                <li>✅ Fixed SQLite schema issue – 10 mins ago</li>
+                <li>?? Tweaked CSS for login form – 1 hr ago</li>
+                <li>?? Pushed Flask route changes to Git – 3 hrs ago</li>
+            </ul>
+        </section>
+
+        <section class="shortcuts">
+            <h2>Quick Actions</h2>
+            <button onclick="location.href='/new-task'">➕ New Task</button>
+            <button onclick="location.href='/messages'">?? View Messages</button>
+            <button onclick="location.href='/profile'">?? Edit Profile</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 YourApp. Built with Flask + ??</p>
+    </footer>
+</body>
+</html>
